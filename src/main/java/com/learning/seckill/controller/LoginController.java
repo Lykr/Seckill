@@ -1,7 +1,7 @@
 package com.learning.seckill.controller;
 
 import com.learning.seckill.result.Result;
-import com.learning.seckill.service.RedisService;
+import com.learning.seckill.redis.RedisService;
 import com.learning.seckill.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

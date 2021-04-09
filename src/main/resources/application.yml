@@ -26,6 +26,17 @@ spring:
         cache: true
         compressed: true
       static-locations: classpath:/static/
+  redis:
+    port: 6379
+    host: localhost
+    database: 0
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: 1ms
+        min-idle: 0
+    connect-timeout: 5000ms
 
 mybatis:
   type-aliases-package: com.learning.seckill.pojo
