@@ -6,17 +6,17 @@ import java.util.Date;
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String phone;
+    private Long phone;
     private String nickname;
     private String password;
     private String avatar;
     private Date registerDate;
 
-    public String getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(Long phone) {
         this.phone = phone;
     }
 
@@ -50,5 +50,16 @@ public class User implements Serializable {
 
     public void setRegisterDate(Date registerDate) {
         this.registerDate = registerDate;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "phone=" + phone +
+                ", nickname='" + nickname + '\'' +
+                ", password='" + password + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", registerDate=" + registerDate +
+                '}';
     }
 }

@@ -43,7 +43,7 @@ public class UserService {
         Long phone = loginVo.getPhone();
         String password = loginVo.getPassword();
 
-        // 根据手机号获取用户
+        // 根据 token 获取用户
         User user = getByPhone(phone);
         if (user == null) throw new SecKillException(CodeMsg.MOBILE_NOT_EXIST);
 
@@ -56,6 +56,10 @@ public class UserService {
         Cookie cookie = new Cookie("token", token);
         cookie.setPath("/");
         response.addCookie(cookie);
+
+        // 缓存 token
+        redisService.set(UserPrefix.GET_BY_TOKEN, token, user);
+
         return token;
     }
 }
