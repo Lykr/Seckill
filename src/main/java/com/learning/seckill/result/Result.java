@@ -1,4 +1,4 @@
-package result;
+package com.learning.seckill.result;
 
 public class Result<T> {
 
