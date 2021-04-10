@@ -83,7 +83,7 @@ function doLogin(){
 	var password = $("#password").val();
 	
 	$.ajax({
-		url: "/login/do-login",
+		url: "/login",
 	    type: "POST",
 	    data:{
 			phone: $("#phone").val(),

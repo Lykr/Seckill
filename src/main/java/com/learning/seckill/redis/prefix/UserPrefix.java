@@ -5,7 +5,7 @@ public class UserPrefix extends BasePrefix {
         super(prefix);
     }
 
-    public static UserPrefix GET_BY_PHONE = new UserPrefix("user-phone");
+    public static UserPrefix GET_BY_PHONE = new UserPrefix("user-phone:");
 
-    public static UserPrefix GET_BY_NAME = new UserPrefix("user-name");
+    public static UserPrefix GET_BY_NAME = new UserPrefix("user-name:");
 }

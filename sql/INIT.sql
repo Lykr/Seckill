@@ -6,8 +6,7 @@ CREATE TABLE user (
                                 `password` varchar(32) DEFAULT NULL,
                                 `avatar` varchar(128) DEFAULT NULL COMMENT '头像，云存储的ID',
                                 `register_date` datetime DEFAULT NULL COMMENT '注册时间',
-                                `last_login_date` datetime DEFAULT NULL COMMENT '上蔟登录时间',
                                 PRIMARY KEY (`phone`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO user VALUES ('15000000000', 'user0', 'user0p', null, '2019-01-09 17:08:16', null);
+INSERT INTO user VALUES ('15000000000', 'user0', 'user0p', null, '2019-01-09 17:08:16');

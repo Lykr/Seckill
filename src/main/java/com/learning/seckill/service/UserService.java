@@ -6,9 +6,9 @@ import com.learning.seckill.pojo.User;
 import com.learning.seckill.redis.RedisService;
 import com.learning.seckill.redis.prefix.UserPrefix;
 import com.learning.seckill.result.CodeMsg;
+import com.learning.seckill.vo.LoginVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.learning.seckill.vo.LoginVo;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
