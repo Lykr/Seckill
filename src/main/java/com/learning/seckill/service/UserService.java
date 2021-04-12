@@ -26,16 +26,21 @@ public class UserService {
     public User getByPhone(Long phone) {
         User user;
         // 尝试从缓存中获取
-        user = redisService.get(UserPrefix.GET_BY_PHONE, String.valueOf(phone), User.class);
+        user = redisService.get(UserPrefix.PHONE_TO_USER, String.valueOf(phone), User.class);
         // 从数据库中获取
         if (user == null) {
             user = userDao.getByPhone(phone);
-            if (user != null) redisService.set(UserPrefix.GET_BY_PHONE, String.valueOf(phone), user);
+            if (user != null) redisService.set(UserPrefix.PHONE_TO_USER, String.valueOf(phone), user);
         }
         return user;
     }
 
-    public String login(HttpServletResponse response, LoginVo loginVo) {
+    public String login(String tokenInput, HttpServletResponse response, LoginVo loginVo) {
+        // 判断 token 是否不为空
+        if (tokenInput != null && redisService.get(UserPrefix.TOKEN_TO_USER, tokenInput, User.class) != null) {
+            throw new SecKillException(CodeMsg.LOGIN_ALREADY);
+        }
+
         // 判断是否存在输入
         if (loginVo == null) throw new SecKillException(CodeMsg.SERVER_ERROR);
 
@@ -43,7 +48,7 @@ public class UserService {
         Long phone = loginVo.getPhone();
         String password = loginVo.getPassword();
 
-        // 根据 token 获取用户
+        // 根据 phone 获取用户
         User user = getByPhone(phone);
         if (user == null) throw new SecKillException(CodeMsg.MOBILE_NOT_EXIST);
 
@@ -58,7 +63,7 @@ public class UserService {
         response.addCookie(cookie);
 
         // 缓存 token
-        redisService.set(UserPrefix.GET_BY_TOKEN, token, user);
+        redisService.set(UserPrefix.TOKEN_TO_USER, token, user);
 
         return token;
     }

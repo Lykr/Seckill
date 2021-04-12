@@ -35,7 +35,7 @@ public class GoodsController {
     @GetMapping("/detail/{goodsId}")
     public String detail(Model model, @CookieValue(value = "token", required = false) String token, @PathVariable("goodsId") Long goodsId) {
         if (token == null) return "redirect:/login";
-        User user = redisService.get(UserPrefix.GET_BY_TOKEN, token, User.class);
+        User user = redisService.get(UserPrefix.TOKEN_TO_USER, token, User.class);
         model.addAttribute("user", user);
 
         Goods goods = goodsService.getGoodsById(goodsId);

@@ -31,9 +31,9 @@ public class LoginController {
 
     @ResponseBody
     @PostMapping
-    public Result<String> doLogin(HttpServletResponse response, LoginVo loginVo) {
+    public Result<String> doLogin(@CookieValue(value = "token", required = false) String tokenInput, HttpServletResponse response, LoginVo loginVo) {
         log.info("User [{}] login...", loginVo.toString());
-        String token = userService.login(response, loginVo);
+        String token = userService.login(tokenInput, response, loginVo);
         log.info("User [{}] login successfully!", loginVo);
         return Result.success(token);
     }

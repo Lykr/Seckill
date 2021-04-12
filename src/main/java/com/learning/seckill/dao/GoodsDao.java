@@ -17,7 +17,7 @@ public interface GoodsDao {
     @Select("SELECT * FROM goods where id = #{id}")
     Goods getGoods(@Param("id") Long id);
 
-    @Update("UPDATE goods SET stock = stock - 1 where id = #{id}")
+    @Update("UPDATE goods SET stock = stock - 1 where id = #{id} and stock > 0")
     Boolean reduceStock(@Param("id") Long id);
 
 }

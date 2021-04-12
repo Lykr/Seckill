@@ -84,14 +84,12 @@
     function doLogin() {
         g_showLoading();
 
-        var password = $("#password").val();
-
         $.ajax({
             url: "/login",
             type: "POST",
             data: {
                 phone: $("#phone").val(),
-                password: password
+                password: $("#password").val()
             },
             success: function (data) {
                 layer.closeAll();

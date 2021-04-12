@@ -1,11 +1,16 @@
 package com.learning.seckill.service;
 
 import com.learning.seckill.dao.OrderDao;
+import com.learning.seckill.exception.SecKillException;
 import com.learning.seckill.pojo.Goods;
 import com.learning.seckill.pojo.Order;
 import com.learning.seckill.pojo.User;
+import com.learning.seckill.redis.RedisService;
+import com.learning.seckill.redis.prefix.GoodsPrefix;
+import com.learning.seckill.result.CodeMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -16,6 +21,9 @@ public class OrderService {
 
     @Autowired
     OrderDao orderDao;
+
+    @Autowired
+    RedisService redisService;
 
     public Order getByUserIdGoodsId(Long userPhone, Long goodsId) {
         return orderDao.getByUserIdGoodsId(userPhone, goodsId);

@@ -2,6 +2,7 @@ package com.learning.seckill.service;
 
 import com.learning.seckill.dao.GoodsDao;
 import com.learning.seckill.pojo.Goods;
+import com.learning.seckill.redis.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
