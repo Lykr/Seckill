@@ -10,6 +10,7 @@ public class CodeMsg {
     // 通用的错误码
     public static CodeMsg SERVER_ERROR = new CodeMsg(500100, "服务端异常");
     public static CodeMsg BIND_ERROR = new CodeMsg(500101, "参数校验异常：%s");
+    public static CodeMsg LIMITER_TIP = new CodeMsg(500102, "服务器正忙，请稍后尝试访问");
 
     // 登录模块 5002XX
     public static CodeMsg SESSION_ERROR = new CodeMsg(500201, "Session 不存在或者已经失效");
@@ -25,8 +26,8 @@ public class CodeMsg {
     // 订单模块 5004XX
 
     // 秒杀模块 5005XX
-    public static CodeMsg MIAO_SHA_OVER = new CodeMsg(500500, "商品已经秒杀完毕");
-    public static CodeMsg REPEATE_MIAOSHA = new CodeMsg(500501, "不能重复秒杀");
+    public static CodeMsg SECKILL_OVER = new CodeMsg(500500, "商品已经秒杀完毕");
+    public static CodeMsg REPEATE_SECKILL = new CodeMsg(500501, "不能重复秒杀");
 
     private CodeMsg() {
     }

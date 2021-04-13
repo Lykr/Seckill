@@ -1,6 +1,7 @@
 package com.learning.seckill.controller;
 
 import com.learning.seckill.exception.SecKillException;
+import com.learning.seckill.limit.Limit;
 import com.learning.seckill.pojo.Goods;
 import com.learning.seckill.pojo.Order;
 import com.learning.seckill.pojo.User;
@@ -34,6 +35,7 @@ public class OrderController {
     @Autowired
     RedisService redisService;
 
+    @Limit(maxTokenNum = 1000, createTokenRate = 100)
     @PostMapping("/seckill")
     public String secKill(Model model, @CookieValue(value = "token", required = false) String token, @RequestParam("goodsId") Long goodsId) {
         User user = redisService.get(UserPrefix.TOKEN_TO_USER, token, User.class);
@@ -44,19 +46,19 @@ public class OrderController {
         Goods goods = goodsService.getGoodsById(goodsId);
 
         Long curStock = redisService.getAndDecr(GoodsPrefix.GOODS_ID_TO_STOCK, String.valueOf(goods.getId()));
-        if (curStock < 0) throw new SecKillException(CodeMsg.MIAO_SHA_OVER);
+        if (curStock < 0) throw new SecKillException(CodeMsg.SECKILL_OVER);
 
         // 判断库存
         // int stock = goods.getStock();
         // if (stock <= 0) {
-        //     model.addAttribute("errmsg", CodeMsg.MIAO_SHA_OVER.getMsg());
+        //     model.addAttribute("errmsg", CodeMsg.SECKILL_OVER.getMsg());
         //     return "seckill_fail";
         // }
 
         //判断是否已经秒杀到了
         Order order = orderService.getByUserIdGoodsId(user.getPhone(), goodsId);
         if (order != null) {
-            model.addAttribute("errmsg", CodeMsg.REPEATE_MIAOSHA.getMsg());
+            model.addAttribute("errmsg", CodeMsg.REPEATE_SECKILL.getMsg());
             return "seckill_fail";
         }
 
